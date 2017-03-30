@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFToolkit
+namespace WpfToolkit.Routing.Abstractions
 {
-    public class Class1
-    {
-    }
+	public interface IView
+	{
+		object DataContext
+		{
+			get;
+			set;
+		}
+	}
 }
