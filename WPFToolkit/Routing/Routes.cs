@@ -1,36 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using WpfToolkit.Forms.Toolkit.Services;
 using WpfToolkit.Routing.Abstractions;
 using WpfToolkit.Routing.Data;
 
 namespace WpfToolkit.Routing
 {
-	public static class Routes
-	{
-		private static RouteCollection routes;
+    public static class Routes
+    {
+        private static RouteCollection routes;
 
-		public static void Configure(Action<IRouteCollection> addRoutes)
-		{
-			routes = new RouteCollection();
-			addRoutes(routes);
-		}
+        static Routes()
+        {
+            routes = new RouteCollection();
+        }
 
-		public static void AddRouting(this IServiceCollection services)
-		{
-			services.AddTransient<NavigationProvider>();
-			services.AddSingleton<INavigator, Navigator>();
-			services.AddSingleton<IRouteCollection>(routes);
+        public static void Configure(Action<IRouteCollection> addRoutes)
+        {
+            addRoutes(routes);
+        }
 
-			foreach (var route in routes)
-			{
-				services.AddTransient(route.View);
-				services.AddTransient(route.ViewModel);
-			}
-		}
-	}
+        public static void AddRouting(this IServiceCollection container)
+        {
+            if (!routes.Any())
+            {
+                throw new InvalidOperationException("Define some routes");
+            }
+
+            container.AddSingleton<NavigationProvider>();
+            container.AddSingleton<INavigator, Navigator>();
+            container.AddSingleton<IViewResolver, Navigator>();
+            container.AddSingleton<IRouteCollection>(routes);
+        }
+    }
 }

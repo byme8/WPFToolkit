@@ -1,6 +1,6 @@
 ﻿namespace WpfToolkit.Routing
 {
-	public class NavigationPage
-	{
-	}
+    public class NavigationPage
+    {
+    }
 }
