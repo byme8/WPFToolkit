@@ -12,17 +12,17 @@ namespace WPFToolkit.Test.ViewModels
 			=> typeof(TValue).Name;
 	}
 
-	class IntViewModel : ViewModel<int>
+    public class IntViewModel : ViewModel<int>
 	{
 
 	}
 
-	class StringViewModel : ViewModel<string>
+    public class StringViewModel : ViewModel<string>
 	{
 
 	}
 
-	class DoubleViewModel : ViewModel<double>
+    public class DoubleViewModel : ViewModel<double>
 	{
 
 	}
